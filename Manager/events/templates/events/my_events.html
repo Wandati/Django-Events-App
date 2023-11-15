@@ -1,0 +1,38 @@
+{% extends "events/layout.html" %} {% block content %} <br />
+{% if user.is_authenticated %}
+<h1 class="text-center mb-3">Events...</h1>
+{% if events|length < 1 %}
+<h2 class="text-center">No events Available...</h2>
+{% else %} {% for event in events %}
+<div class="card">
+  <div class="card-header"><strong> {{ event }} </strong></div>
+  <div class="card-body">
+    <h5 class="card-title"><strong> Venue: </strong> {{ event.venue }}</h5>
+    <p class="card-text">
+      <strong>Venue Website:</strong> {{ event.venue.web }} <br />
+      <strong>Date:</strong> {{ event.date }} <br />
+      <strong>Description:</strong> {{ event.description }} <br />
+      <strong>Manager:</strong> {{ event.manager }} <br />
+      <strong> Attendees:</strong> <br />
+      {% for user in event.attendees.all %} {{ user }} <br />
+      {% endfor %}
+    </p>
+  </div>
+  {% if user.is_authenticated %} {% if user == event.manager %}
+  <div class="card-footer text-muted">
+    <a
+      href="{% url 'update_event' event.id %}"
+      class="btn btn-outline-secondary btn-sm"
+      >Update Event</a
+    >
+    <a
+      href="{% url 'delete_event' event.id %}"
+      class="btn btn-outline-danger btn-sm"
+      >Delete Event</a
+    >
+  </div>
+  {% endif %} {% endif %}
+</div>
+<br />
+<br />
+{% endfor %} {% endif %}{% endif %}{% endblock %}

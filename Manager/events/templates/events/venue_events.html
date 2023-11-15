@@ -1,0 +1,6 @@
+{% extends 'events/layout.html' %} {% block content %}
+
+<h1>List Events</h1>
+{% for event in events %}
+<a class="text-dark" href="{% url 'show-event' event.id %}">{{ event}}</a><br />
+{% endfor %} {% endblock %}

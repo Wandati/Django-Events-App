@@ -1,0 +1,25 @@
+{% extends "events/layout.html" %} {% block content %}
+<h1 class="text-center">Venue Details...</h1>
+<br />
+<div class="card">
+  <div class="card-header"><strong> {{ venue }} </strong></div>
+  <div class="card-body">
+    <p class="card-text">
+      <strong> Address:</strong> {{ venue.address }}<br />
+      <strong>Zipcode:</strong> {{ venue.zipcode }} <br />
+      <strong>Email:</strong> {{ venue.email }} <br />
+      <strong>Phone:</strong> {{ venue.phone }} <br />
+      <strong> Web Url:</strong>
+      <a href="{{ venue.web }}"> {{ venue.web }} </a></br>
+      <strong>Owner:</strong> {{ owner }} <br>
+      <p> Contact Owner through <strong> {{ owner.email }}</strong> </p>
+    </p>
+    <br>
+    {% if venue.venue_img %}
+    <img src="{{ venue.venue_img.url }}">
+    {% endif %}
+    <a class="text-decoration-none btn btn-secondary"href="{% url 'venue-events' venue.id %}">Click Here To View Events</a>
+  </div>
+</div>
+
+{% endblock %}

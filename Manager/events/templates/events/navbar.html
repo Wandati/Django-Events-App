@@ -1,0 +1,159 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">EventsApp</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% comment %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' '1997' 'November' %}"
+            >Calendar</a
+          >
+        </li>
+        {% endcomment %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Events
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'events'  %}">All Events</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+              <a class="dropdown-item" href="{% url 'add_event'  %}"
+                >Add Event</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'my_events'  %}"
+                >My Events</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% comment %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'events'  %}">Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add_event'  %}">AddEvent</a>
+        </li>
+        {% endcomment %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Venues
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'venues'  %}">All Venues</a>
+            </li>
+            {% if user.is_authenticated %} {% if user.is_superuser %}
+            <li>
+              <a class="dropdown-item" href="{% url 'add_venue'  %}"
+                >Add Venue</a
+              >
+            </li>
+            {% endif %} {% endif %}
+          </ul>
+        </li>
+        {% comment %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add_venue'  %}">AddVenue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'venues'  %}">Venues</a>
+        </li>
+        {% endcomment %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Downloads
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'venues_csv'  %}"
+                >Venues Csv File</a
+              >
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="{% url 'venues_pdf'  %}"
+                >Venue Pdf File</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% comment %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'venues_csv'  %}">VenuesCsv</a>
+        </li>
+        {% endcomment %} {% comment %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'venues_csv'  %}">VenuesCsv</a>
+        </li>
+        {% endcomment %} {% if user.is_authenticated %}
+        <br />
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin_approval'  %}">Admin</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout_user'  %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register_user'  %}">Sign Up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login_user'  %}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+      <form class="d-flex" action="{% url 'searched_venues' %}" method="POST">
+        {% csrf_token %}
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search For Venues Here"
+          aria-label="Search"
+          name="searched_venues"
+          required
+        />
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

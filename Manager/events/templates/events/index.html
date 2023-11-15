@@ -1,0 +1,26 @@
+{% extends "events/layout.html" %} {% block content %}
+<center>
+  {% comment %}
+  <h1>Hello Wandat!!Events for {{month}} {{year}}</h1>
+  {% endcomment %} {% if user.is_authenticated %}
+  <h1>Hello {{ user }}! Events for {{ month }} {{ year }}</h1>
+  {% else %}
+  <h1>Events for {{ month }} {{ year }}</h1>
+  {% endif %}
+
+  <br />
+  <p>As of {{ time }}</p>
+  {{ cal|safe }}
+  <br />
+  <br />
+  <h1 class="text-center">Upcoming Events</h1>
+  {% if events %} {% for event in events %} {{ event }} - {{ event.date }}
+  <a class="text-dark" href="{% url 'show-event' event.id %}">Show Event</a>
+
+  <br />
+  {% endfor %} {% else %}
+  <p class="text-center">There are no Current events...</p>
+  {% endif %}
+  <p class="mt-5">Copyright &copy{{ year }}</p>
+</center>
+{% endblock %}

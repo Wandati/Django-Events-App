@@ -1,0 +1,17 @@
+{% extends "events/layout.html" %} {% block content %}
+<h1 class="text-center">Sign Up</h1>
+<br />
+<center>
+  {% if form.errors %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There Was an error With Your Form
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  <form action="" method="POST">
+    {% csrf_token %}
+     {{ form.as_p }}
+     <br>
+     <button type="submit" class="btn btn-secondary">Sign Up</button>
+</center>
+{% endblock %}
