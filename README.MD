@@ -91,4 +91,4 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ## Acknowledgments
 
 The Django team for creating a powerful and versatile web framework.
-Contributors and the open-source community for valuable insights and support
+Contributors and the open-source community for valuable insights and support.
